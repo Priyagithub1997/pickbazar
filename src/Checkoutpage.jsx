@@ -101,7 +101,7 @@ const Checkoutpage = () => {
     
      <p>1 X {product.name} | {product.lb}lb (On Sale)</p>
      <p>$ {product.originalrate}</p>
-   </div>
+   </div>    
    <div className='order'>
      <p>Sub Total</p>
      <p>$ {product.originalrate}</p>
