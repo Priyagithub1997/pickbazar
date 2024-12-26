@@ -1,0 +1,70 @@
+{
+    "foods":[
+    {
+        "id": 1,
+        "image": "apples.jpg",
+        "name": "Apples",
+        "lb": 1,
+        "linethroughrate": 2.00,
+        "originalrate": 1.60,
+        "discount": 20
+    },
+    {
+        "id": 2,
+        "image": "babyspinach.jpg",
+        "name": "Baby Spinach",
+        "lb": 2,
+        "originalrate": 0.60
+    },
+    {
+        "id": 3,
+        "image": "blueberries.jpg",
+        "name": "Blueberries",
+        "lb": 1,
+        "originalrate": 3.00
+    },
+    {
+        "id": 4,
+        "image": "brussels.jpg",
+        "name": "Brussels Sprout",
+        "lb": 1,
+        "linethroughrate": 5.00,
+        "originalrate": 3.00,
+        "discount": 20
+    },
+    {
+        "id": 5,
+        "image": "celery.jpg",
+        "name": "Celery Stick",
+        "lb": 1,
+        "linethroughrate": 6.00,
+        "originalrate": 5.00,
+        "discount": 17
+    },
+    {
+        "id": 6,
+        "image": "clementines1.jpg",
+        "name": "Clementines",
+        "lb": 1,
+        "linethroughrate": 3.00,
+        "originalrate": 2.50,
+        "discount": 17
+    },
+    {
+        "id": 7,
+        "image": "sweetcorn2.jpg",
+        "name": "Sweet Corn",
+        "lb": 1,
+        "linethroughrate": 5.00,
+        "originalrate": 4.00,
+        "discount": 20
+    },
+    {
+        "id": 8,
+        "image": "cucumber.jpg",
+        "name": "Cucumber",
+        "lb": 2.5,
+        "originalrate": 2.50
+    }
+]
+}
