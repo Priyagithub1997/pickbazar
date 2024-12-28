@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 
+
 import { useNavigate } from 'react-router-dom';
 import { CiApple } from "react-icons/ci";
 import { TbMeat } from "react-icons/tb";
@@ -23,33 +24,30 @@ import { BsBagCheck } from "react-icons/bs";
 
 const Home = () => {
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const [search,setsearch]=useState("");
-  const [foods, setfoods] = useState([]);
+  const [search, setsearch] = useState("");
+
   const [isopen, setisopen] = useState(false);
   const [cart, setcart] = useState([]);
   const [count, setcount] = useState(1);
   const [total, settotal] = useState(0);
- 
-  const [overlay,setoverlay]=useState(false);
+  const [overlay, setoverlay] = useState(false);
+  const [foods, setfoods] = useState([]);
   useEffect(() => {
     const getallfoods = async () => {
-
-      try {
-        const response = await fetch("http://localhost:3500/foods");
-        const data = await response.json();
-        console.log(data);
+      try{
+        const res = await fetch("http://localhost:3500/foods");
+        const data = await res.json();
         setfoods(data);
-
+        console.log(foods);
       }
-      catch (err) {
-        console.log("Error is", err);
-      }
+catch(err){
+  console.log("error",err);
+}
 
     }
     getallfoods();
-
 
   }, []);
 
@@ -96,7 +94,7 @@ const Home = () => {
           <p>Get your healthy foods and snacks delivered at your doorsteps all day everyday</p>
 
           <div className='inputdiv'>
-            <input type='text' value={search}  onChange={(e)=>setsearch(e.target.value)} placeholder='Search your products from here'></input>
+            <input type='text' value={search} onChange={(e) => setsearch(e.target.value)} placeholder='Search your products from here'></input>
 
 
             <button><FaSearch />   Search</button>
@@ -125,7 +123,7 @@ const Home = () => {
         </div>
       </div>
       <div className='shopcontainer'>
-     
+
 
         <ul className='sidebar'>
           <li><CiApple /><select><option>Fruits & Vegetables</option></select></li>
@@ -144,30 +142,35 @@ const Home = () => {
 
 
         <div className='foods'>
-        <div className='cartbar'>
+          <div className='cartbar'>
 
-<p><BsBagCheck /> {cart.length} Item </p>      
-<p className='ctotal'>$ {total}</p>
-      </div>
+            <p><BsBagCheck /> {cart.length} Item </p>
+            <p className='ctotal'>$ {total}</p>
+          </div>
 
-          {foods.filter((food)=>(food.name.toLowerCase().includes(search.toLowerCase()))).map((food, id) => (
+          {foods.filter((food) => (food.name.toLowerCase()).includes(search.toLowerCase())) 
+            .map((food, id) => (
 
 
-            <div key={id} className='box'>
-              <img src={food.image}></img>
-              {!food.discount ? <h5></h5> : <h5 className='discount'>{food.discount}%</h5>}
-              <h2>{food.name}</h2>
-              <p>{food.lb}lb</p>
-              {!food.linethroughrate ? <h4>  </h4> : <h4 className='linethroughrate'>${food.linethroughrate}</h4>}
-              <div className='boxrate'>
-                <h4>${food.originalrate}</h4>
-                {cart.includes(food) ?  <div className='countvalue'>
-                  <div onClick={addcount}>+</div>
-                  <div>{count}</div>
-                  <div onClick={minuscount}>-</div>
-                </div>: <button onClick={() => showcart(food)}>Cart</button>}
-                
+              <div key={id} className='box'>
+                <img src={food.image}></img>
+                {!food.discount ? <h5></h5> : <h5 className='discount'>{food.discount}%</h5>}
+                <h2>{food.name}</h2>
+                <p>{food.lb}lb</p>
+                {!food.linethroughrate ? <h4>  </h4> : <h4 className='linethroughrate'>${food.linethroughrate}</h4>}
+                <div className='boxrate'>
+                  <h4>${food.originalrate}</h4>
+                  {cart.includes(food) ? <div className='countvalue'>
+                    <div onClick={addcount}>+</div>
+                    <div>{count}</div>
+                    <div onClick={minuscount}>-</div>
+                  </div> : <button onClick={() => showcart(food)}>Cart</button>}
 
+
+
+
+
+                </div>
 
 
 
@@ -175,12 +178,8 @@ const Home = () => {
 
 
 
-            </div>
 
-
-
-
-          ))}
+            ))}
 
 
           <button className='loadmore'>Load More</button>
@@ -215,21 +214,21 @@ const Home = () => {
                 </div>
                 <div className='rate'>$ {count * product.originalrate}</div>
                 <div className='deleteitem' onClick={() => deleteitem(product)}>X</div>
-              
+
               </div>
-             
-             
-             
+
+
+
             ))}
 
 
 
 
 
-          
+
             <div className='checkoutdiv'>
- 
-              <button className='checkout' onClick={()=>navigate('/checkoutpage',{state:cart})}>Checkout</button>
+
+              <button className='checkout' onClick={() => navigate('/checkoutpage', { state: cart })}>Checkout</button>
               <h3 className='total'>${total}</h3>
             </div>
           </div>
@@ -239,7 +238,7 @@ const Home = () => {
 
 
 
-    
+
 
       </div>
 
