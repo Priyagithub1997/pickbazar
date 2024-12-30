@@ -15,6 +15,7 @@ import { PiBowlFoodBold } from "react-icons/pi";
 import { LuMilk } from "react-icons/lu";
 import { FaSearch } from "react-icons/fa";
 import { BsBagCheck } from "react-icons/bs";
+import fooddata from "../src/DB.json";
 
 
 
@@ -26,15 +27,15 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const [search, setsearch] = useState("");
 
+ const[filtered,setfiltered]=useState([]); 
   const [isopen, setisopen] = useState(false);
   const [cart, setcart] = useState([]);
   const [count, setcount] = useState(1);
   const [total, settotal] = useState(0);
   const [overlay, setoverlay] = useState(false);
  
-  const [foods, setfoods] = useState([]);
+  const [foods ,setfoods] = useState([]);
   useEffect(() => {
     const getallfoods = async () => {
       try{
@@ -51,20 +52,8 @@ catch(err){
     getallfoods();
 
   }, []); 
+ 
 
-  useEffect(() => {
-
-    settotal(cart.reduce((acc, curr) => acc + curr.originalrate, 0))
-  }, [cart]);
-
-  const showcart = (food) => {
-    setoverlay(true);
-    setisopen(true);
-
-    setcart([...cart, food]);
-    console.log(cart.length);
-
-  }
   const closecart = () => {
     setisopen(false);
     setoverlay(false);
@@ -83,6 +72,21 @@ catch(err){
 
 
 
+  
+  useEffect(() => {
+
+    settotal(cart.reduce((acc, curr) => acc + curr.originalrate, 0))
+  }, [cart]);
+
+  const showcart = (food) => {
+    setoverlay(true);
+    setisopen(true);
+
+    setcart([...cart, food]);
+    console.log(cart.length);
+
+  }
+
 
   return (
     <><div className='homecontainer'>
@@ -95,7 +99,7 @@ catch(err){
           <p>Get your healthy foods and snacks delivered at your doorsteps all day everyday</p>
 
           <div className='inputdiv'>
-            <input type='text' value={search} onChange={(e) => setsearch(e.target.value)} placeholder='Search your products from here'></input>
+            <input type='text' onChange={(e)=>setsearch(e.target.value)} placeholder='Search your products from here'></input>
 
 
             <button><FaSearch />   Search</button>
@@ -149,33 +153,31 @@ catch(err){
             <p className='ctotal'>$ {total}</p>
           </div>
 
-          {foods.filter((food) => (food.name.toLowerCase()).includes(search.toLowerCase())) 
-            .map((food, id) => (
-
-
-              <div key={id} className='box'>
-                <img src={food.image}></img>
-                {!food.discount ? <h5></h5> : <h5 className='discount'>{food.discount}%</h5>}
-                <h2>{food.name}</h2>
-                <p>{food.lb}lb</p>
-                {!food.linethroughrate ? <h4>  </h4> : <h4 className='linethroughrate'>${food.linethroughrate}</h4>}
-                <div className='boxrate'>
-                  <h4>${food.originalrate}</h4>
-                  {cart.includes(food) ? <div className='countvalue'>
-                    <div onClick={addcount}>+</div>
-                    <div>{count}</div>
-                    <div onClick={minuscount}>-</div>
-                  </div> : <button onClick={() => showcart(food)}>Cart</button>}
+          {foods.map((food) => (
+          <div   key={food.id} className='box'>
+          <img src={food.image}></img>
+          {!food.discount ? <h5></h5> : <h5 className='discount'>{food.discount}%</h5>}
+          <h2>{food.name}</h2>
+          <p>{food.lb}lb</p>
+          {!food.linethroughrate ? <h4>  </h4> : <h4 className='linethroughrate'>${food.linethroughrate}</h4>}
+          <div className='boxrate'>
+            <h4>${food.originalrate}</h4>
+            {cart.includes(food) ? <div className='countvalue'>
+              <div onClick={addcount}>+</div>
+              <div>{count}</div>
+              <div onClick={minuscount}>-</div>
+            </div> : <button onClick={() => showcart(food)}>Cart</button>}
 
 
 
 
 
-                </div>
+          </div>
 
 
 
-              </div>
+        </div> 
+          
 
 
 
