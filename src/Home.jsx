@@ -33,6 +33,7 @@ const Home = () => {
   const [count, setcount] = useState(1);
   const [total, settotal] = useState(0);
   const [overlay, setoverlay] = useState(false);
+ 
   const [foods, setfoods] = useState([]);
   useEffect(() => {
     const getallfoods = async () => {
@@ -49,7 +50,7 @@ catch(err){
     }
     getallfoods();
 
-  }, []);
+  }, []); 
 
   useEffect(() => {
 
