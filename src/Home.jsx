@@ -15,7 +15,7 @@ import { PiBowlFoodBold } from "react-icons/pi";
 import { LuMilk } from "react-icons/lu";
 import { FaSearch } from "react-icons/fa";
 import { BsBagCheck } from "react-icons/bs";
-import fooddata from "../src/DB.json";
+
 
 
 
@@ -39,10 +39,10 @@ const Home = () => {
   useEffect(() => {
     const getallfoods = async () => {
       try{
-        const res = await fetch("http://localhost:3500/foods");
+        const res = await fetch("https://priyagithub1997.github.io/jsonfile/DB.json");
         const data = await res.json();
-        setfoods(data);
-        console.log(foods);
+        setfoods(data.foods);
+        console.log(data.foods);
       }
 catch(err){
   console.log("error",err);
